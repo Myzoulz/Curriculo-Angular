@@ -1,0 +1,38 @@
+<app-default-login-layout
+(submit)="submit()"
+(navigate)="navigate()"
+[disableLoginButton]="!registerForm.valid"
+loginButtonText="Cadastrar"
+  registerButtonText="Voltar ao login"
+>
+  <form [formGroup]="registerForm">
+    <app-default-input
+    formControlName="email"
+    inputName="email"
+    type="email"
+    label="Email:"
+    placeholder="Digite seu email"
+    >
+
+    </app-default-input>
+    <app-default-input
+    formControlName="password"
+    inputName="senha"
+    type="password"
+    label="Senha:"
+    placeholder="Digite sua senha"
+    >
+
+    </app-default-input>
+
+    <app-default-input
+    formControlName="cpf"
+    inputName="cpf"
+    type="number"
+    label="CPF:"
+    placeholder="Informe seu CPF"
+    >
+
+    </app-default-input>
+  </form>
+</app-default-login-layout>

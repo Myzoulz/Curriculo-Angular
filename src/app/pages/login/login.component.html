@@ -1,0 +1,28 @@
+<app-default-login-layout
+(submit)="submit()"
+(navigate)="navigate()"
+[disableLoginButton]="!loginForm.valid"
+loginButtonText="Login"
+registerButtonText="Registre-se"
+>
+  <form [formGroup]="loginForm">
+    <app-default-input
+    formControlName="email"
+    inputName="email"
+    type="email"
+    label="Email:"
+    placeholder="Digite seu email"
+    >
+
+    </app-default-input>
+    <app-default-input
+    formControlName="password"
+    inputName="senha"
+    type="password"
+    label="Senha:"
+    placeholder="Digite sua senha"
+    >
+
+    </app-default-input>
+  </form>
+</app-default-login-layout>

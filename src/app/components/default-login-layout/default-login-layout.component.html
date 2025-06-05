@@ -1,0 +1,12 @@
+<main class="default-login-layout">
+  <section class="default-login-layout__content">
+    <div class="default-login-layout__input">
+      <ng-content></ng-content>
+    </div>
+    <button class="login__button" (click)="submit()" [disabled]="disableLoginButton">{{ loginButtonText }}</button>
+    <div class="span">
+      <span>ou</span>
+    </div>
+    <button class="register__button" (click)="navigate()">{{ registerButtonText }}</button>
+  </section>
+</main>

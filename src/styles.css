@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+
+.toast-container .ngx-toastr {
+  box-shadow: 0 4px 24px rgba(24, 28, 36, 0.7) !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
