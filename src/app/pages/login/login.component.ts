@@ -32,7 +32,12 @@ export class LoginComponent {
 
   submit() {
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => this.toastr.success("Login successful"),
+      next: (res: any) => {
+      sessionStorage.setItem('token', res.token);
+      sessionStorage.setItem('username', res.email);
+      this.toastr.success("Login successful");
+      this.router.navigate(['/home']);
+    },
       error: () => this.toastr.error("Error!")
     })
   }
