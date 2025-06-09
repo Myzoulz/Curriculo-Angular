@@ -1,1 +1,23 @@
-<p>default-home-user-layout works!</p>
+<main class="user-home-layout">
+  <section class="user-info-section">
+    <h2>Bem-vindo!</h2>
+    <ng-container *ngIf="curriculoStatus === null; else statusBlock">
+      <p>Você ainda não cadastrou seu currículo.</p>
+      <button class="curriculo-btn" (click)="cadastrar.emit()">Cadastrar Currículo</button>
+    </ng-container>
+    <ng-template #statusBlock>
+      <div class="curriculo-status">
+        <p>
+          Status do seu currículo:
+          <span [ngClass]="{
+            'status-aprovado': curriculoStatus === 'aprovado',
+            'status-reprovado': curriculoStatus === 'reprovado'
+          }">
+            {{ curriculoStatus | titlecase }}
+          </span>
+        </p>
+        <button class="curriculo-btn" (click)="editar.emit()">Editar Currículo</button>
+      </div>
+    </ng-template>
+  </section>
+</main>

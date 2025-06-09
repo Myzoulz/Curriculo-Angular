@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, FormControl } from '@angular/forms';
 
-type InputTypes = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+export type InputTypes = 'text' | 'number' | 'email' | 'password' | 'tel' | 'date';
 
 @Component({
   selector: 'app-default-input',
@@ -21,6 +21,7 @@ export class DefaultInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = "";
   @Input() label: string = "";
   @Input() inputName: string = "";
+  @Input() formControl?: FormControl;
 
   value: string = '';
   onChange: any = () => {};

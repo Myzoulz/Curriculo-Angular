@@ -1,0 +1,10 @@
+<div class="input-wrapper">
+  <label [for]="inputName">{{ label }}</label>
+  <select
+    [id]="inputName"
+    [value]="value"
+    (change)="onSelect($event)">
+    <option value="" disabled selected>Selecione</option>
+    <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
+  </select>
+</div>

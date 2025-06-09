@@ -1,0 +1,17 @@
+<div>
+  <label>Competências</label>
+  <div *ngFor="let comp of formArray.controls; let i = index" class="competencia-item">
+    <app-default-input
+      [formControl]="getDescricaoControl(comp)"
+      label="Descrição"
+      inputName="descricao"
+    />
+    <app-default-input
+      [formControl]="getNivelControl(comp)"
+      label="Nível de Proficiência"
+      inputName="nivel"
+    />
+    <button type="button" (click)="removeCompetencia(i)">Remover</button>
+  </div>
+  <button type="button" class="add-competencia-btn" (click)="addCompetencia()">Adicionar Competência</button>
+</div>
