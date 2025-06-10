@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DefaultHomeUserLayoutComponent } from "../../components/default-home-user-layout/default-home-user-layout.component";
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +9,31 @@ import { DefaultHomeUserLayoutComponent } from "../../components/default-home-us
   styleUrl: './home.component.css',
   imports: [DefaultHomeUserLayoutComponent]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   username = sessionStorage.getItem('username') || 'Usuário';
-  curriculoStatus: 'aprovado' | 'reprovado' | null = null;
+  curriculoStatus: 'enviado' | 'analise' | 'aprovado' | 'reprovado' | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {}
+
+  ngOnInit() {
+    this.userService.getStatusCurriculo().subscribe({
+      next: (status) => {
+        this.curriculoStatus = status;
+      },
+      error: () => {
+        this.curriculoStatus = null;
+      }
+    });
+  }
 
   onCadastrarCurriculo() {
     this.router.navigate(['/cadastro']);
   }
 
   onEditarCurriculo() {
-    this.router.navigate(['/curriculo/editar']);
+    this.router.navigate(['/editar']);
   }
 }

@@ -43,3 +43,9 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+input[readonly] {
+  background: #232936;
+  color: #b0b8c9;
+  cursor: not-allowed;
+}

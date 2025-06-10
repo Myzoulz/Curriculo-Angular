@@ -1,7 +1,7 @@
 <!-- Use este HTML para ambos, mudando o título e o texto do botão conforme o componente -->
 <div class="cadastro-curriculo-layout">
   <div class="cadastro-curriculo-content">
-    <h2> Cadastro de Currículo </h2>
+    <h2> Editar Currículo </h2>
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <app-default-input formControlName="nome" label="Nome" inputName="nome" placeholder="Digite seu nome" />
       <app-default-input formControlName="cpf" label="CPF" inputName="cpf" type="number" placeholder="CPF" [readonly]="true" />

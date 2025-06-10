@@ -4,6 +4,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { CadastroCurriculoComponent } from './pages/cadastro-curriculo/cadastro-curriculo.component';
+import { EditarCurriculoComponent } from './pages/editar-curriculo/editar-curriculo.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,11 @@ export const routes: Routes = [
   {
     path: "cadastro",
     component: CadastroCurriculoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "editar",
+    component: EditarCurriculoComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -1,23 +1,46 @@
 <main class="user-home-layout">
   <section class="user-info-section">
     <h2>Bem-vindo!</h2>
-    <ng-container *ngIf="curriculoStatus === null; else statusBlock">
-      <p>Você ainda não cadastrou seu currículo.</p>
-      <button class="curriculo-btn" (click)="cadastrar.emit()">Cadastrar Currículo</button>
-    </ng-container>
-    <ng-template #statusBlock>
-      <div class="curriculo-status">
-        <p>
-          Status do seu currículo:
-          <span [ngClass]="{
-            'status-aprovado': curriculoStatus === 'aprovado',
-            'status-reprovado': curriculoStatus === 'reprovado'
-          }">
-            {{ curriculoStatus | titlecase }}
-          </span>
-        </p>
-        <button class="curriculo-btn" (click)="editar.emit()">Editar Currículo</button>
+    <p>Status do seu currículo:</p>
+    <div class="progress-checkpoints">
+  <p-progressBar [value]="progressValue" [showValue]="false"></p-progressBar>
+      <div class="checkpoints">
+        <div class="checkpoint"
+            [class.complete]="isComplete(1)"
+            [class.in-progress]="isInProgress(1)">
+          Enviado
+          <span *ngIf="isInProgress(1)" class="checkpoint-spinner"></span>
+        </div>
+        <div class="checkpoint"
+            [class.complete]="isComplete(2)"
+            [class.in-progress]="isInProgress(2)">
+          Análise
+          <span *ngIf="isInProgress(2)" class="checkpoint-spinner"></span>
+        </div>
+        <div class="checkpoint"
+            [class.complete]="isComplete(3)">
+          Resultado
+        </div>
       </div>
-    </ng-template>
+    </div>
+    <div class="step-description">
+      <ng-container [ngSwitch]="curriculoStatus">
+        <p *ngSwitchCase="'enviado'">Seu currículo foi enviado e está aguardando análise.</p>
+        <p *ngSwitchCase="'analise'">Seu currículo está em análise.</p>
+        <p *ngSwitchCase="'aprovado'">Parabéns! Seu currículo foi aprovado.</p>
+        <p *ngSwitchCase="'reprovado'">Seu currículo foi reprovado. Você pode editar e reenviar.</p>
+        <p *ngSwitchDefault>Você ainda não cadastrou seu currículo.</p>
+      </ng-container>
+    </div>
+    <button
+      class="curriculo-btn"
+      *ngIf="curriculoStatus === null"
+      (click)="cadastrar.emit()"
+    >Cadastrar Currículo</button>
+    <button
+      class="curriculo-btn"
+      *ngIf="curriculoStatus !== null"
+      (click)="editar.emit()"
+    >Editar Currículo</button>
   </section>
 </main>
