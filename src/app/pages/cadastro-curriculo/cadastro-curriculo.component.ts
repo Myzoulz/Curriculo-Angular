@@ -78,7 +78,6 @@ export class CadastroCurriculoComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error('Erro ao enviar currículo!');
-          console.error(err);
         }
       });
     }

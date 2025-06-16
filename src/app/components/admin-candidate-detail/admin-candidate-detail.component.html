@@ -1,0 +1,30 @@
+<div *ngIf="candidato">
+  <h3>Detalhes do Candidato</h3>
+  <p><strong>Nome:</strong> {{candidato.nome}}</p>
+  <p><strong>Data de Nascimento:</strong> {{candidato.dataNascimento | date:'dd/MM/yyyy'}}</p>
+  <p><strong>Telefone:</strong> {{candidato.telefone}}</p>
+  <p><strong>Email:</strong> {{candidato.email}}</p>
+  <p><strong>Escolaridade:</strong> {{candidato.escolaridade}}</p>
+  <p><strong>Função desejada:</strong> {{candidato.funcao}}</p>
+  <p><strong>Status:</strong> {{candidato.status}}</p>
+  <div *ngIf="candidato.competencias?.length">
+    <strong>Competências:</strong>
+    <ul>
+      <li *ngFor="let comp of candidato.competencias">
+        {{comp.descricao}} <span style="color:#b0b8c9;">({{comp.nivel}})</span>
+      </li>
+    </ul>
+  </div>
+  <button
+  (click)="aprovar()"
+  [disabled]="candidato.status.toLowerCase() === 'aprovado' || candidato.status.toLowerCase() === 'reprovado'"
+>
+  Aprovar
+</button>
+<button
+  (click)="reprovar()"
+  [disabled]="candidato.status.toLowerCase() === 'aprovado' || candidato.status.toLowerCase() === 'reprovado'"
+>
+  Reprovar
+</button>
+</div>

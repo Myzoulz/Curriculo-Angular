@@ -31,16 +31,23 @@ export class LoginComponent {
   }
 
   submit() {
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: (res: any) => {
+  this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    next: (res: any) => {
       sessionStorage.setItem('token', res.token);
       sessionStorage.setItem('username', res.email);
       this.toastr.success("Login successful");
-      this.router.navigate(['/home']);
-    },
-      error: () => this.toastr.error("Error!")
-    })
-  }
+
+      const payload = JSON.parse(atob(res.token.split('.')[1]));
+
+      if (payload.roles && payload.roles.includes('ADMIN')) {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      },
+    error: () => this.toastr.error("Error!")
+  });
+}
 
   navigate() {
     this.router.navigate(['/register']);

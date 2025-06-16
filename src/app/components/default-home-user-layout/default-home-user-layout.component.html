@@ -27,20 +27,28 @@
       <ng-container [ngSwitch]="curriculoStatus">
         <p *ngSwitchCase="'enviado'">Seu currículo foi enviado e está aguardando análise.</p>
         <p *ngSwitchCase="'analise'">Seu currículo está em análise.</p>
-        <p *ngSwitchCase="'aprovado'">Parabéns! Seu currículo foi aprovado.</p>
-        <p *ngSwitchCase="'reprovado'">Seu currículo foi reprovado. Você pode editar e reenviar.</p>
+        <p *ngSwitchCase="'aprovado'">Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.</p>
+        <p *ngSwitchCase="'reprovado'">Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.</p>
         <p *ngSwitchDefault>Você ainda não cadastrou seu currículo.</p>
       </ng-container>
     </div>
     <button
-      class="curriculo-btn"
-      *ngIf="curriculoStatus === null"
-      (click)="cadastrar.emit()"
-    >Cadastrar Currículo</button>
-    <button
-      class="curriculo-btn"
-      *ngIf="curriculoStatus !== null"
-      (click)="editar.emit()"
-    >Editar Currículo</button>
+  class="curriculo-btn"
+  *ngIf="curriculoStatus === null"
+  (click)="cadastrar.emit()"
+>Cadastrar Currículo</button>
+<button
+  class="curriculo-btn"
+  *ngIf="curriculoStatus === 'enviado' || curriculoStatus === 'analise'"
+  (click)="editar.emit()"
+>Editar Currículo</button>
+<button
+  class="curriculo-btn"
+  *ngIf="curriculoStatus === 'aprovado' || curriculoStatus === 'reprovado'"
+  disabled
+  style="margin-top: 1.5rem;"
+>
+  Editar Currículo
+</button>
   </section>
 </main>

@@ -86,7 +86,6 @@ export class EditarCurriculoComponent implements OnInit {
       },
       error: (err) => {
         this.toastr.error('Erro ao buscar currículo!');
-        console.error(err);
       }
     });
   }
@@ -105,7 +104,6 @@ export class EditarCurriculoComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error('Erro ao atualizar currículo!');
-          console.error(err);
         }
       });
     }

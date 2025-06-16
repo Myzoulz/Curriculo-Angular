@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
 import { Curriculo } from '../models/curriculo';
+import { environment } from '../../environments/environment';
+import { mapBackendStatus, CurriculoStatus } from '../utils/status-mapper.util';
+import { StatusResponse } from '../models/status-response';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -14,7 +17,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Usuario>("http://localhost:8080/user", { headers });
+    return this.http.get<Usuario>(`${environment.apiUrl}/user`, { headers });
   }
 
   enviarCurriculo(curriculo: Curriculo) {
@@ -23,24 +26,26 @@ export class UserService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.post('http://localhost:8080/curriculos', curriculo, { headers });
+    return this.http.post(`${environment.apiUrl}/curriculos`, curriculo, { headers });
   }
 
-  getStatusCurriculo(): Observable<'enviado' | 'analise' | 'aprovado' | 'reprovado' | null> {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.get<{ status: string }>('http://localhost:8080/curriculos/status', { headers })
-      .pipe(map((res: { status: string }) => res.status as 'enviado' | 'analise' | 'aprovado' | 'reprovado' | null));
-  }
+  getStatusCurriculo(): Observable<CurriculoStatus | null> {
+  const token = sessionStorage.getItem('token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+  return this.http.get<StatusResponse>(`${environment.apiUrl}/curriculos/status`, { headers })
+  .pipe(
+    map((res: StatusResponse) => mapBackendStatus(res.status))
+  );
+}
 
   getMeuCurriculo(): Observable<Curriculo> {
     const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Curriculo>('http://localhost:8080/curriculos/meu', { headers });
+    return this.http.get<Curriculo>(`${environment.apiUrl}/curriculos/meu`, { headers });
   }
 
   getCurriculoPorId(id: number): Observable<Curriculo> {
@@ -48,7 +53,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Curriculo>(`http://localhost:8080/curriculos/${id}`, { headers });
+    return this.http.get<Curriculo>(`${environment.apiUrl}/${id}`, { headers });
   }
 
   atualizarCurriculo(curriculo: Curriculo) {
@@ -57,6 +62,6 @@ export class UserService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put(`http://localhost:8080/curriculos/${curriculo.id}`, curriculo, { headers });
+    return this.http.put(`${environment.apiUrl}/curriculos/${curriculo.id}`, curriculo, { headers });
   }
 }

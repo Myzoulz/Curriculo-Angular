@@ -1,0 +1,34 @@
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Escolaridade</th>
+    <th>Status</th>
+    <th>Ações</th>
+  </tr>
+  <tr *ngFor="let c of candidatos">
+    <td>{{c.nome}}</td>
+    <td>{{c.escolaridade}}</td>
+    <td>
+      <span [ngClass]="{
+          'status-aprovado': c.status.toLowerCase() === 'aprovado',
+          'status-reprovado': c.status.toLowerCase() === 'reprovado',
+          'status-analise': c.status.toLowerCase() !== 'aprovado' && c.status.toLowerCase() !== 'reprovado'
+        }">
+        <ng-container [ngSwitch]="c.status.toLowerCase()">
+          <span *ngSwitchCase="'aprovado'">&#10003; Aprovado</span>
+          <span *ngSwitchCase="'reprovado'">&#10007; Reprovado</span>
+          <span *ngSwitchDefault>&#9203; {{ c.status | titlecase }}</span>
+        </ng-container>
+      </span>
+    </td>
+    <td>
+      <button (click)="onSelecionar(c)">Detalhes</button>
+    </td>
+  </tr>
+</table>
+
+<div class="paginacao">
+  <button (click)="carregarPagina(paginaAtual - 1)" [disabled]="paginaAtual === 0">Anterior</button>
+  <span>Página {{paginaAtual + 1}} de {{totalPaginas}}</span>
+  <button (click)="carregarPagina(paginaAtual + 1)" [disabled]="paginaAtual + 1 >= totalPaginas">Próxima</button>
+</div>

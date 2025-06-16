@@ -1,1 +1,17 @@
-<p>adm-page works!</p>
+<div class="admin-page-layout">
+  <section class="admin-dashboard-section">
+    <app-admin-dashboard [atualizar]="atualizarLista"></app-admin-dashboard>
+  </section>
+  <section class="admin-list-section">
+    <app-admin-candidate-list
+      (selecionar)="onSelecionarCandidato($event)"
+      [atualizar]="atualizarLista">
+    </app-admin-candidate-list>
+  </section>
+  <section class="admin-detail-section" *ngIf="candidatoSelecionado">
+    <app-admin-candidate-detail
+      [candidato]="candidatoSelecionado"
+      (atualizado)="onAtualizarCandidato()">
+    </app-admin-candidate-detail>
+  </section>
+</div>

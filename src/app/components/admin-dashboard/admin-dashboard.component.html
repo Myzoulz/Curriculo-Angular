@@ -1,0 +1,15 @@
+<div class="dashboard-layout">
+  <div class="dashboard-content">
+    <h2 style="text-align:center; margin-bottom:2rem;">Dashboard Administrativo</h2>
+    <div class="dashboard-charts">
+      <div>
+        <h3>Distribuição de Escolaridade</h3>
+        <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+      </div>
+      <div>
+        <h3>Distribuição de Situação</h3>
+        <p-chart type="pie" [data]="pieData" [options]="pieOptions"></p-chart>
+      </div>
+    </div>
+  </div>
+</div>

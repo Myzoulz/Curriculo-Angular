@@ -1,0 +1,52 @@
+.admin-page-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+  background: #181c24;
+  min-height: 100vh;
+}
+
+.admin-dashboard-section {
+  flex: 1 1 350px;
+  min-width: 350px;
+  max-width: 700px;
+}
+
+.admin-list-section {
+  margin-top: 30px;
+  flex: 1 1 350px;
+  min-width: 350px;
+  max-width: 500px;
+}
+
+.admin-detail-section {
+  margin-top: 30px;
+  flex: 1 1 320px;
+  min-width: 320px;
+  max-width: 400px;
+  background: #232936;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  padding: 2rem 1.5rem;
+  color: #e5e7eb;
+}
+
+@media (max-width: 900px) {
+  .admin-page-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+    padding: 1rem 0.5rem;
+  }
+
+  .admin-dashboard-section,
+  .admin-list-section,
+  .admin-detail-section {
+    max-width: 100%;
+    min-width: 0;
+    margin-top: 0 !important;
+  }
+}

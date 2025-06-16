@@ -6,12 +6,20 @@
       label="Descrição"
       inputName="descricao"
     />
-    <app-default-input
+    <app-default-select
       [formControl]="getNivelControl(comp)"
       label="Nível de Proficiência"
       inputName="nivel"
-    />
+      [options]="nivelOptions"
+    ></app-default-select>
     <button type="button" (click)="removeCompetencia(i)">Remover</button>
   </div>
-  <button type="button" class="add-competencia-btn" (click)="addCompetencia()">Adicionar Competência</button>
+  <button
+    type="button"
+    class="add-competencia-btn"
+    (click)="addCompetencia()"
+    [disabled]="formArray.length >= 4"
+  >
+    Adicionar Competência
+  </button>
 </div>

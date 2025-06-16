@@ -48,6 +48,14 @@
   background: #2563eb;
 }
 
+.curriculo-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: #94a3b8;
+  color: #e5e7eb;
+  box-shadow: none;
+}
+
 .step-description {
   margin-top: 3rem;
   font-size: 1.05rem;
@@ -120,6 +128,20 @@
   background: #3b82f6;
   border-color: #3b82f6;
   animation: pulse 1s infinite alternate;
+}
+.curriculo-bloqueado {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.bloqueado-icone {
+  font-size: 1.3rem;
 }
 
 @keyframes pulse {
