@@ -41,6 +41,7 @@ export class EditarCurriculoComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      id: [null],
       nome: ['', Validators.required],
       cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       dataNascimento: ['', Validators.required],
@@ -58,6 +59,7 @@ export class EditarCurriculoComponent implements OnInit {
           dataNascimento = curriculo.dataNascimento.slice(0, 10);
         }
         this.form.patchValue({
+          id: curriculo.id,
           nome: curriculo.nome ?? '',
           dataNascimento: dataNascimento ?? '',
           telefone: curriculo.telefone ?? '',
