@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } fr
 import { DefaultInputComponent } from '../../components/default-input/default-input.component';
 import { DefaultSelectComponent } from '../../components/default-select/default-select.component';
 import { DefaultCompetenciasListComponent } from '../../components/default-competencias-list/default-competencias-list.component';
+import { CurriculoService } from '../../services/curriculo.service';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -32,6 +33,7 @@ export class CadastroCurriculoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private curriculoService: CurriculoService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -71,7 +73,7 @@ export class CadastroCurriculoComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const curriculo = this.form.getRawValue();
-      this.userService.enviarCurriculo(curriculo).subscribe({
+      this.curriculoService.enviarCurriculo(curriculo).subscribe({
         next: () => {
           this.toastr.success('Currículo enviado com sucesso!');
           this.router.navigate(['/home']);

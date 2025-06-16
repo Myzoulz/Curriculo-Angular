@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } fr
 import { DefaultInputComponent } from '../../components/default-input/default-input.component';
 import { DefaultSelectComponent } from '../../components/default-select/default-select.component';
 import { DefaultCompetenciasListComponent } from '../../components/default-competencias-list/default-competencias-list.component';
+import { CurriculoService } from '../../services/curriculo.service';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -33,6 +34,7 @@ export class EditarCurriculoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private curriculoService: CurriculoService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -49,7 +51,7 @@ export class EditarCurriculoComponent implements OnInit {
       competencias: new FormArray([])
     });
 
-    this.userService.getMeuCurriculo().subscribe({
+    this.curriculoService.getMeuCurriculo().subscribe({
       next: (curriculo: Curriculo) => {
         let dataNascimento = '';
         if (curriculo.dataNascimento && typeof curriculo.dataNascimento === 'string') {
@@ -63,7 +65,6 @@ export class EditarCurriculoComponent implements OnInit {
           funcao: curriculo.funcao ?? '',
         });
 
-        // Preenche competências
         const competenciasArray = this.form.get('competencias') as FormArray;
         competenciasArray.clear();
         curriculo.competencias.forEach((comp: any) => {
@@ -73,7 +74,6 @@ export class EditarCurriculoComponent implements OnInit {
           }));
         });
 
-        // Preenche CPF e email
         this.userService.getUsuario().subscribe({
           next: (usuario: Usuario) => {
             this.form.patchValue({
@@ -97,7 +97,7 @@ export class EditarCurriculoComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const curriculo = this.form.getRawValue();
-      this.userService.atualizarCurriculo(curriculo).subscribe({
+      this.curriculoService.atualizarCurriculo(curriculo).subscribe({
         next: () => {
           this.toastr.success('Currículo atualizado com sucesso!');
           this.router.navigate(['/home']);

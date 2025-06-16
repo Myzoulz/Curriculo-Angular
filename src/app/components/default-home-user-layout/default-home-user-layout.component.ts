@@ -18,7 +18,7 @@ export class DefaultHomeUserLayoutComponent {
 
   get activeIndex(): number {
   switch (this.curriculoStatus) {
-    case null: return 0; // Não enviou ainda
+    case null: return 0;
     case 'enviado': return 1;
     case 'analise': return 2;
     case 'aprovado':

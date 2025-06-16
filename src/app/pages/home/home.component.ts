@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DefaultHomeUserLayoutComponent } from "../../components/default-home-user-layout/default-home-user-layout.component";
+import { CurriculoService } from '../../services/curriculo.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -15,11 +16,11 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private curriculoService: CurriculoService,
   ) {}
 
   ngOnInit() {
-    this.userService.getStatusCurriculo().subscribe({
+    this.curriculoService.getStatusCurriculo().subscribe({
       next: (status) => {
         this.curriculoStatus = status;
       },
