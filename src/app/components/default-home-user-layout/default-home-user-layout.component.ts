@@ -52,6 +52,9 @@ isComplete(step: number): boolean {
   };
 
   get statusMessage(): string {
-    return this.curriculoStatus ? this.statusMessages[this.curriculoStatus] : '';
+  if (this.curriculoStatus && this.statusMessages[this.curriculoStatus]) {
+    return this.statusMessages[this.curriculoStatus];
   }
+  return '';
+}
 }
