@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Curriculo } from '../models/curriculo';
 import { DistribuicaoDashboard } from '../models/distribuicao-dashboard';
@@ -13,43 +13,32 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   getDistribuicaoEscolaridade(): Observable<DistribuicaoDashboard> {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.http.get<DistribuicaoDashboard>(`${environment.apiUrl}/admin/relatorios/escolaridade`, { headers });
+    return this.http.get<DistribuicaoDashboard>(`${environment.apiUrl}/admin/relatorios/escolaridade`);
   }
 
   getDistribuicaoStatus(): Observable<DistribuicaoDashboard> {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.http.get<DistribuicaoDashboard>(`${environment.apiUrl}/admin/relatorios/situacao`, { headers });
+    return this.http.get<DistribuicaoDashboard>(`${environment.apiUrl}/admin/relatorios/situacao`);
   }
 
   getTodosCurriculos(page: number = 0, size: number = 10): Observable<Page<Curriculo>> {
-  const token = sessionStorage.getItem('token');
-  const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-  return this.http.get<Page<Curriculo>>(
-    `${environment.apiUrl}/admin/relatorios/candidatos?page=${page}&size=${size}`,
-    { headers }
-  ).pipe(
-    map((page: Page<Curriculo>) => ({
-      ...page,
-      content: page.content.map((c: Curriculo) => ({
-        ...c,
-        status: mapBackendStatus(c.status) ?? 'analise'
+    return this.http.get<Page<Curriculo>>(
+      `${environment.apiUrl}/admin/relatorios/candidatos?page=${page}&size=${size}`
+    ).pipe(
+      map((page: Page<Curriculo>) => ({
+        ...page,
+        content: page.content.map((c: Curriculo) => ({
+          ...c,
+          status: mapBackendStatus(c.status) ?? 'analise'
+        }))
       }))
-    }))
-  );
-}
+    );
+  }
 
   aprovarCurriculo(id: number): Observable<any> {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.http.put(`${environment.apiUrl}/admin/relatorios/candidatos/${id}/aprovar`, {}, { headers });
+    return this.http.put(`${environment.apiUrl}/admin/relatorios/candidatos/${id}/aprovar`, {});
   }
 
   reprovarCurriculo(id: number): Observable<any> {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.http.put(`${environment.apiUrl}/admin/relatorios/candidatos/${id}/reprovar`, {}, { headers });
+    return this.http.put(`${environment.apiUrl}/admin/relatorios/candidatos/${id}/reprovar`, {});
   }
 }
