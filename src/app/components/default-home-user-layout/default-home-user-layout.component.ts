@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { CurriculoStatus } from '../../utils/status-mapper.util';
 
 @Component({
   selector: 'app-default-home-user-layout',
@@ -11,8 +12,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 })
 export class DefaultHomeUserLayoutComponent {
   @Input() username: string = '';
-  @Input() curriculoStatus: 'enviado' | 'analise' | 'aprovado' | 'reprovado' | null = null;
-
+  @Input() curriculoStatus: CurriculoStatus = 'sem-curriculo';
   @Output() cadastrar = new EventEmitter<void>();
   @Output() editar = new EventEmitter<void>();
 
@@ -44,17 +44,15 @@ isComplete(step: number): boolean {
   return false;
 }
 
-  statusMessages: Record<'enviado' | 'analise' | 'aprovado' | 'reprovado', string> = {
+  statusMessages: Record<CurriculoStatus, string> = {
     enviado: 'Seu currículo foi enviado e está aguardando análise.',
     analise: 'Seu currículo está em análise.',
     aprovado: 'Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.',
-    reprovado: 'Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.'
+    reprovado: 'Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.',
+    'sem-curriculo': 'Você ainda não cadastrou seu currículo.'
   };
 
   get statusMessage(): string {
-  if (this.curriculoStatus && this.statusMessages[this.curriculoStatus]) {
     return this.statusMessages[this.curriculoStatus];
   }
-  return '';
-}
 }

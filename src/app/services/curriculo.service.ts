@@ -15,7 +15,7 @@ export class CurriculoService {
     return this.http.post(`${environment.apiUrl}/curriculos`, curriculo);
   }
 
-  getStatusCurriculo(): Observable<CurriculoStatus | null> {
+  getStatusCurriculo(): Observable<CurriculoStatus> {
     return this.http.get<StatusResponse>(`${environment.apiUrl}/curriculos/status`)
       .pipe(
         map((res: StatusResponse) => mapBackendStatus(res.status))

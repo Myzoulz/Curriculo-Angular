@@ -30,9 +30,9 @@
     </div>
     <button
   class="curriculo-btn"
-  *ngIf="curriculoStatus === null"
-  (click)="cadastrar.emit()"
->Cadastrar Currículo</button>
+    *ngIf="curriculoStatus === 'sem-curriculo'"
+    (click)="cadastrar.emit()"
+  >Cadastrar Currículo</button>
 <button
   class="curriculo-btn"
   *ngIf="curriculoStatus === 'enviado' || curriculoStatus === 'analise'"
