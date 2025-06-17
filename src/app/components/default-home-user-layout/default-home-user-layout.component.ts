@@ -43,11 +43,15 @@ isComplete(step: number): boolean {
   if (step === 3) return this.activeIndex > 2;
   return false;
 }
-  get resultadoLabel(): string {
-    if (this.curriculoStatus === 'aprovado') return 'Parabéns! Seu currículo foi aprovado.';
-    if (this.curriculoStatus === 'reprovado') return 'Seu currículo foi reprovado. Você pode editar e reenviar.';
-    if (this.curriculoStatus === 'analise') return 'Seu currículo está em análise.';
-    if (this.curriculoStatus === 'enviado') return 'Seu currículo foi enviado e está aguardando análise.';
-    return '';
+
+  const statusMessages = {
+    enviado: 'Seu currículo foi enviado e está aguardando análise.',
+    analise: 'Seu currículo está em análise.',
+    aprovado: 'Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.',
+    reprovado: 'Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.'
+  }
+
+  get statusMessage(): string {
+    return this.curriculoStatus ? this.statusMessages[this.curriculoStatus] : '';
   }
 }

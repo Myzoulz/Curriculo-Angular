@@ -24,13 +24,9 @@
       </div>
     </div>
     <div class="step-description">
-      <ng-container [ngSwitch]="curriculoStatus">
-        <p *ngSwitchCase="'enviado'">Seu currículo foi enviado e está aguardando análise.</p>
-        <p *ngSwitchCase="'analise'">Seu currículo está em análise.</p>
-        <p *ngSwitchCase="'aprovado'">Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.</p>
-        <p *ngSwitchCase="'reprovado'">Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.</p>
-        <p *ngSwitchDefault>Você ainda não cadastrou seu currículo.</p>
-      </ng-container>
+      <div class="step-description">
+        <p>{{ statusMessage || 'Você ainda não cadastrou seu currículo.' }}</p>
+      </div>
     </div>
     <button
   class="curriculo-btn"
