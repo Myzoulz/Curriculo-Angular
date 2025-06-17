@@ -18,11 +18,11 @@ export class DefaultHomeUserLayoutComponent {
 
   get activeIndex(): number {
   switch (this.curriculoStatus) {
-    case null: return 0;
     case 'enviado': return 1;
     case 'analise': return 2;
     case 'aprovado':
     case 'reprovado': return 3;
+    case 'sem-curriculo':
     default: return 0;
   }
 }
@@ -32,7 +32,7 @@ get progressValue(): number {
 }
 
 isInProgress(step: number): boolean {
-  if (step === 1) return this.curriculoStatus === null;
+  if (step === 1) return this.curriculoStatus === 'sem-curriculo';
   if (step === 2) return this.curriculoStatus === 'enviado';
   return false;
 }
