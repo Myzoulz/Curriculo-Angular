@@ -44,12 +44,12 @@ isComplete(step: number): boolean {
   return false;
 }
 
-  const statusMessages = {
+  statusMessages: Record<'enviado' | 'analise' | 'aprovado' | 'reprovado', string> = {
     enviado: 'Seu currículo foi enviado e está aguardando análise.',
     analise: 'Seu currículo está em análise.',
     aprovado: 'Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.',
     reprovado: 'Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.'
-  }
+  };
 
   get statusMessage(): string {
     return this.curriculoStatus ? this.statusMessages[this.curriculoStatus] : '';
