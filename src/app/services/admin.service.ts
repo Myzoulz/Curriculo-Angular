@@ -5,7 +5,7 @@ import { Curriculo } from '../models/curriculo';
 import { DistribuicaoDashboard } from '../models/distribuicao-dashboard';
 import { Page } from '../models/page';
 import { environment } from '../../environments/environment';
-import { mapBackendStatus, CurriculoStatus } from '../utils/status-mapper.util';
+import { mapBackendStatus} from '../utils/status-mapper.util';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
