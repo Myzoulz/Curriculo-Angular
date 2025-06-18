@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { DefaultInputComponent } from '../../components/default-input/default-input.component';
 import { DefaultSelectComponent } from '../../components/default-select/default-select.component';
 import { DefaultCompetenciasListComponent } from '../../components/default-competencias-list/default-competencias-list.component';
@@ -22,13 +28,20 @@ import { Usuario } from '../../models/usuario';
     DefaultInputComponent,
     DefaultSelectComponent,
     DefaultCompetenciasListComponent,
-  ]
+  ],
 })
 export class EditarCurriculoComponent implements OnInit {
   form!: FormGroup;
   escolaridadeOptions = [
-    'Analfabeto', 'Fundamental Completo', 'Médio Incompleto', 'Médio Completo',
-    'Superior Incompleto', 'Superior Completo', 'Mestrado', 'Doutorado', 'Ignorado'
+    'Analfabeto',
+    'Fundamental Completo',
+    'Médio Incompleto',
+    'Médio Completo',
+    'Superior Incompleto',
+    'Superior Completo',
+    'Mestrado',
+    'Doutorado',
+    'Ignorado',
   ];
 
   constructor(
@@ -43,19 +56,29 @@ export class EditarCurriculoComponent implements OnInit {
     this.form = this.fb.group({
       id: [null],
       nome: ['', Validators.required],
-      cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      cpf: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+        ],
+      ],
       dataNascimento: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required],
       escolaridade: ['', Validators.required],
       funcao: ['', Validators.required],
-      competencias: new FormArray([])
+      competencias: new FormArray([]),
     });
 
     this.curriculoService.getMeuCurriculo().subscribe({
       next: (curriculo: Curriculo) => {
         let dataNascimento = '';
-        if (curriculo.dataNascimento && typeof curriculo.dataNascimento === 'string') {
+        if (
+          curriculo.dataNascimento &&
+          typeof curriculo.dataNascimento === 'string'
+        ) {
           dataNascimento = curriculo.dataNascimento.slice(0, 10);
         }
         this.form.patchValue({
@@ -70,25 +93,27 @@ export class EditarCurriculoComponent implements OnInit {
         const competenciasArray = this.form.get('competencias') as FormArray;
         competenciasArray.clear();
         curriculo.competencias.forEach((comp: any) => {
-          competenciasArray.push(this.fb.group({
-            descricao: [comp.descricao, Validators.required],
-            nivel: [comp.nivel, Validators.required]
-          }));
+          competenciasArray.push(
+            this.fb.group({
+              descricao: [comp.descricao, Validators.required],
+              nivel: [comp.nivel, Validators.required],
+            })
+          );
         });
 
         this.userService.getUsuario().subscribe({
           next: (usuario: Usuario) => {
             this.form.patchValue({
               cpf: usuario.cpf,
-              email: usuario.email
+              email: usuario.email,
             });
             this.form.get('cpf')?.disable();
-          }
+          },
         });
       },
       error: (err) => {
         this.toastr.error('Erro ao buscar currículo!');
-      }
+      },
     });
   }
 
@@ -106,7 +131,7 @@ export class EditarCurriculoComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error('Erro ao atualizar currículo!');
-        }
+        },
       });
     }
   }

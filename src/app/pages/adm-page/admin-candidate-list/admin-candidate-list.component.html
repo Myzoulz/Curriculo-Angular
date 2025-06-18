@@ -6,14 +6,18 @@
     <th>Ações</th>
   </tr>
   <tr *ngFor="let c of candidatos">
-    <td>{{c.nome}}</td>
-    <td>{{c.escolaridade}}</td>
+    <td>{{ c.nome }}</td>
+    <td>{{ c.escolaridade }}</td>
     <td>
-      <span [ngClass]="{
+      <span
+        [ngClass]="{
           'status-aprovado': c.status.toLowerCase() === 'aprovado',
           'status-reprovado': c.status.toLowerCase() === 'reprovado',
-          'status-analise': c.status.toLowerCase() !== 'aprovado' && c.status.toLowerCase() !== 'reprovado'
-        }">
+          'status-analise':
+            c.status.toLowerCase() !== 'aprovado' &&
+            c.status.toLowerCase() !== 'reprovado'
+        }"
+      >
         <ng-container [ngSwitch]="c.status.toLowerCase()">
           <span *ngSwitchCase="'aprovado'">&#10003; Aprovado</span>
           <span *ngSwitchCase="'reprovado'">&#10007; Reprovado</span>
@@ -28,7 +32,17 @@
 </table>
 
 <div class="paginacao">
-  <button (click)="carregarPagina(paginaAtual - 1)" [disabled]="paginaAtual === 0">Anterior</button>
-  <span>Página {{paginaAtual + 1}} de {{totalPaginas}}</span>
-  <button (click)="carregarPagina(paginaAtual + 1)" [disabled]="paginaAtual + 1 >= totalPaginas">Próxima</button>
+  <button
+    (click)="carregarPagina(paginaAtual - 1)"
+    [disabled]="paginaAtual === 0"
+  >
+    Anterior
+  </button>
+  <span>Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
+  <button
+    (click)="carregarPagina(paginaAtual + 1)"
+    [disabled]="paginaAtual + 1 >= totalPaginas"
+  >
+    Próxima
+  </button>
 </div>

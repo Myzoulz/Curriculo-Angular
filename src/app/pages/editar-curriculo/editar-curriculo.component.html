@@ -1,21 +1,59 @@
 <!-- Use este HTML para ambos, mudando o título e o texto do botão conforme o componente -->
 <div class="cadastro-curriculo-layout">
   <div class="cadastro-curriculo-content">
-    <h2> Editar Currículo </h2>
+    <h2>Editar Currículo</h2>
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <app-default-input formControlName="nome" label="Nome" inputName="nome" placeholder="Digite seu nome" />
-      <app-default-input formControlName="cpf" label="CPF" inputName="cpf" type="number" placeholder="CPF" [readonly]="true" />
-      <app-default-input formControlName="dataNascimento" label="Data de Nascimento" inputName="dataNascimento" type="date" />
-      <app-default-input formControlName="email" label="Email" inputName="email" type="email" placeholder="Email" />
-      <app-default-input formControlName="telefone" label="Telefone" inputName="telefone" type="number" placeholder="Telefone" />
-      <app-default-select formControlName="escolaridade" label="Escolaridade" [options]="escolaridadeOptions" />
-      <app-default-input formControlName="funcao" label="Função" inputName="funcao" placeholder="Função desejada" />
+      <app-default-input
+        formControlName="nome"
+        label="Nome"
+        inputName="nome"
+        placeholder="Digite seu nome"
+      />
+      <app-default-input
+        formControlName="cpf"
+        label="CPF"
+        inputName="cpf"
+        type="number"
+        placeholder="CPF"
+        [readonly]="true"
+      />
+      <app-default-input
+        formControlName="dataNascimento"
+        label="Data de Nascimento"
+        inputName="dataNascimento"
+        type="date"
+      />
+      <app-default-input
+        formControlName="email"
+        label="Email"
+        inputName="email"
+        type="email"
+        placeholder="Email"
+      />
+      <app-default-input
+        formControlName="telefone"
+        label="Telefone"
+        inputName="telefone"
+        type="number"
+        placeholder="Telefone"
+      />
+      <app-default-select
+        formControlName="escolaridade"
+        label="Escolaridade"
+        [options]="escolaridadeOptions"
+      />
+      <app-default-input
+        formControlName="funcao"
+        label="Função"
+        inputName="funcao"
+        placeholder="Função desejada"
+      />
       <div formArrayName="competencias">
-        <app-default-competencias-list [formArray]="competencias"></app-default-competencias-list>
+        <app-default-competencias-list
+          [formArray]="competencias"
+        ></app-default-competencias-list>
       </div>
-      <button type="submit" [disabled]="form.invalid">
-        Enviar
-      </button>
+      <button type="submit" [disabled]="form.invalid">Enviar</button>
     </form>
   </div>
 </div>

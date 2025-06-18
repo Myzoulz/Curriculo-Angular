@@ -5,13 +5,15 @@
   <section class="admin-list-section">
     <app-admin-candidate-list
       (selecionar)="onSelecionarCandidato($event)"
-      [atualizar]="atualizarLista">
+      [atualizar]="atualizarLista"
+    >
     </app-admin-candidate-list>
   </section>
   <section class="admin-detail-section" *ngIf="candidatoSelecionado">
     <app-admin-candidate-detail
       [candidato]="candidatoSelecionado"
-      (atualizado)="onAtualizarCandidato()">
+      (atualizado)="onAtualizarCandidato()"
+    >
     </app-admin-candidate-detail>
   </section>
 </div>

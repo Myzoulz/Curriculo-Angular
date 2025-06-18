@@ -1,6 +1,9 @@
 <div>
   <label>Competências</label>
-  <div *ngFor="let comp of formArray.controls; let i = index" class="competencia-item">
+  <div
+    *ngFor="let comp of formArray.controls; let i = index"
+    class="competencia-item"
+  >
     <app-default-input
       [formControl]="getDescricaoControl(comp)"
       label="Descrição"

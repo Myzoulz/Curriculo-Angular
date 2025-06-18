@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Curriculo } from '../../models/curriculo';
-import { AdminCandidateListComponent } from "../../components/admin-candidate-list/admin-candidate-list.component";
-import { AdminCandidateDetailComponent } from "../../components/admin-candidate-detail/admin-candidate-detail.component";
-import { AdminDashboardComponent } from "../../components/admin-dashboard/admin-dashboard.component";
+import { AdminCandidateListComponent } from './admin-candidate-list/admin-candidate-list.component';
+import { AdminCandidateDetailComponent } from './admin-candidate-detail/admin-candidate-detail.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,7 +10,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './adm-page.component.html',
   styleUrls: ['./adm-page.component.css'],
   standalone: true,
-  imports: [AdminCandidateListComponent, AdminCandidateDetailComponent, AdminDashboardComponent, CommonModule]
+  imports: [
+    AdminCandidateListComponent,
+    AdminCandidateDetailComponent,
+    AdminDashboardComponent,
+    CommonModule,
+  ],
 })
 export class AdmPageComponent {
   candidatoSelecionado: Curriculo | null = null;

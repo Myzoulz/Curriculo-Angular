@@ -1,7 +1,15 @@
-import { Component, EventEmitter, Output, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AdminService } from '../../services/admin.service';
-import { Curriculo } from '../../models/curriculo';
-import { Page } from '../../models/page';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { Curriculo } from '../../../models/curriculo';
+import { AdminService } from '../../../services/admin.service';
+import { Page } from '../../../models/page';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,7 +17,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './admin-candidate-list.component.html',
   styleUrl: './admin-candidate-list.component.css',
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class AdminCandidateListComponent implements OnInit, OnChanges {
   candidatos: Curriculo[] = [];
@@ -27,12 +35,12 @@ export class AdminCandidateListComponent implements OnInit, OnChanges {
   }
 
   carregarPagina(pagina: number) {
-  this.adminService.getTodosCurriculos(pagina, this.tamanhoPagina).subscribe({
-   next: (res: Page<Curriculo>) => {
+    this.adminService.getTodosCurriculos(pagina, this.tamanhoPagina).subscribe({
+      next: (res: Page<Curriculo>) => {
         this.candidatos = res.content;
         this.paginaAtual = res.number;
         this.totalPaginas = res.totalPages;
-      }
+      },
     });
   }
 

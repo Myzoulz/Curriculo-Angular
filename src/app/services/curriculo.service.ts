@@ -16,10 +16,9 @@ export class CurriculoService {
   }
 
   getStatusCurriculo(): Observable<CurriculoStatus> {
-    return this.http.get<StatusResponse>(`${environment.apiUrl}/curriculos/status`)
-      .pipe(
-        map((res: StatusResponse) => mapBackendStatus(res.status))
-      );
+    return this.http
+      .get<StatusResponse>(`${environment.apiUrl}/curriculos/status`)
+      .pipe(map((res: StatusResponse) => mapBackendStatus(res.status)));
   }
 
   getMeuCurriculo(): Observable<Curriculo> {
@@ -31,6 +30,9 @@ export class CurriculoService {
   }
 
   atualizarCurriculo(curriculo: Curriculo) {
-    return this.http.put(`${environment.apiUrl}/curriculos/${curriculo.id}`, curriculo);
+    return this.http.put(
+      `${environment.apiUrl}/curriculos/${curriculo.id}`,
+      curriculo
+    );
   }
 }

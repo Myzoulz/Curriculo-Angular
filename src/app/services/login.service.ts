@@ -5,29 +5,36 @@ import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-  apiURL: string = environment.apiUrl + "/auth";
+  apiURL: string = environment.apiUrl + '/auth';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  login(email: string, senha: string){
-    return this.httpClient.post<LoginResponse>(this.apiURL + "/login", { email, senha }).pipe(
-      tap((value) => {
-        sessionStorage.setItem('token', value.token);
-        sessionStorage.setItem('username', value.name);
-      })
-    )
+  login(email: string, senha: string) {
+    return this.httpClient
+      .post<LoginResponse>(this.apiURL + '/login', { email, senha })
+      .pipe(
+        tap((value) => {
+          sessionStorage.setItem('token', value.token);
+          sessionStorage.setItem('username', value.name);
+        })
+      );
   }
 
-  register(cpf: number, email: string, senha: string){
-    return this.httpClient.post<LoginResponse>(this.apiURL + "/register", {
-      cpf, email, senha }).pipe(
-      tap((value) => {
-        sessionStorage.setItem('token', value.token);
-        sessionStorage.setItem('username', value.name);
+  register(cpf: number, email: string, senha: string) {
+    return this.httpClient
+      .post<LoginResponse>(this.apiURL + '/register', {
+        cpf,
+        email,
+        senha,
       })
-    )
+      .pipe(
+        tap((value) => {
+          sessionStorage.setItem('token', value.token);
+          sessionStorage.setItem('username', value.name);
+        })
+      );
   }
 }

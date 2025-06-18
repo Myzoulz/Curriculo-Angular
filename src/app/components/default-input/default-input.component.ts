@@ -1,5 +1,10 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, FormControl } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  FormControl,
+} from '@angular/forms';
 
 export type InputTypes = 'text' | 'number' | 'email' | 'password' | 'date';
 
@@ -10,17 +15,17 @@ export type InputTypes = 'text' | 'number' | 'email' | 'password' | 'date';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DefaultInputComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   templateUrl: './default-input.component.html',
-  styleUrl: './default-input.component.css'
+  styleUrl: './default-input.component.css',
 })
 export class DefaultInputComponent implements ControlValueAccessor {
-  @Input() type: InputTypes = "text";
-  @Input() placeholder: string = "";
-  @Input() label: string = "";
-  @Input() inputName: string = "";
+  @Input() type: InputTypes = 'text';
+  @Input() placeholder: string = '';
+  @Input() label: string = '';
+  @Input() inputName: string = '';
   @Input() formControl?: FormControl;
   @Input() readonly: boolean = false;
 
@@ -34,7 +39,7 @@ export class DefaultInputComponent implements ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    this.value = value
+    this.value = value;
   }
 
   registerOnChange(fn: any): void {
