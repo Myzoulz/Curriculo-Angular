@@ -48,17 +48,14 @@ export class DefaultHomeUserLayoutComponent {
     return false;
   }
 
-  statusMessages: Record<CurriculoStatus, string> = {
+  statusMessages: { [key: string]: string } = {
     enviado: 'Seu currículo foi enviado e está aguardando análise.',
     analise: 'Seu currículo está em análise.',
-    aprovado:
-      'Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.',
-    reprovado:
-      'Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.',
-    'sem-curriculo': 'Você ainda não cadastrou seu currículo.',
+    aprovado: 'Parabéns! Seu currículo foi aprovado. Aguarde o próximo contato pelo email cadastrado.',
+    reprovado: 'Infelizmente, esta vez não foi possível prosseguir com a sua candidatura. Agradecemos a sua participação no processo.'
   };
 
-  get statusMessage(): string {
-    return this.statusMessages[this.curriculoStatus];
+  getStatusMessage(status: string): string {
+    return this.statusMessages[status] ?? 'Você ainda não cadastrou seu currículo.';
   }
 }
